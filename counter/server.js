@@ -64,8 +64,6 @@ http.createServer((req, res) => {
 
   if (req.method === 'OPTIONS') return send(res, origin ? 204 : 403, null, origin);
   if (req.method === 'GET' && url === '/health') return send(res, 200, { ok: true });
-  // GEÇİCİ: Railway'in sahte X-Forwarded-For'u silip silmediğini test etmek için. Testten sonra kaldırılacak.
-  if (req.method === 'GET' && url === '/__ipcheck') return send(res, 200, { ip: clientIp(req), xff: req.headers['x-forwarded-for'] || null });
   if (req.method === 'GET' && url === '/count') return send(res, 200, { count }, origin);
   if (req.method === 'POST' && url === '/hit') {
     if (!origin) return send(res, 403, { error: 'origin' });

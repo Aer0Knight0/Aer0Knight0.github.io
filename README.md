@@ -29,8 +29,13 @@ Sayfa aynı tarayıcıyı günde bir kez sayar (`localStorage`'daki `visitDay`).
 gelince sadece okur. Yani sayı "günlük tekil ziyaret". Servis cevap vermezse sayaç gizli kalır.
 
 Şu anki kurulum: Railway'de `aer0knight-counter` projesi, `counter` servisi,
-adres `https://counter-production-2254.up.railway.app`, volume `/data`. `counter/` altındaki
-bir değişiklik `main`'e girince Railway kendisi yeniden deploy eder; sayfadaki değişiklikler deploy tetiklemez.
+adres `https://counter-production-2254.up.railway.app`, volume `/data`.
+
+**Otomatik deploy yok.** Servis repo'ya bağlı (root `counter`) ama Railway'de `main` için deploy
+tetikleyicisi kurulu değil, yani push yapınca sayaç kendiliğinden güncellenmez. `counter/` değişince
+elle deploy et: Railway → `counter` servisi → **Deployments** → **Deploy** (en son `main` commit'i),
+ya da Railway GraphQL API'deki `serviceInstanceDeployV2(serviceId, environmentId, commitSha)` ile.
+Sayfadaki değişiklikler zaten sayacı ilgilendirmez.
 
 ### Railway'e kurulum (bir kerelik)
 
