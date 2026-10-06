@@ -74,6 +74,8 @@ Her uygulamanın kendi klasörü var; ana sayfadaki kartı oraya açılır. Şim
   çevresindeki menü ve tema kalsın. Tarih satırı `<p class="meta"><span>…</span><span>…</span></p>`,
   önemli uyarılar `<p class="note warn">`. Metin uygulamanın yaptığıyla birebir aynı olmalı
   (izinler, yedek konumu, paylaşım yolları); uygulama değişirse buraya da yansıt.
+  Tarihler: şimdilik altı sayfada da sadece "Yürürlük tarihi: 6 Ekim 2026" var. Play'de üretime
+  çıkılan gün bu tarih o güne çekilecek; ondan sonraki her değişiklikte "Son güncelleme" eklenir.
 - `dosedial/kvkk-aydinlatma-metni.html`, `kvkk-notice.html`: KVKK m.10 aydınlatma metni (TR/EN).
   Gizlilik politikasındaki bilgilere dayanır; politika değişirse bunu da güncelle.
 - `dosedial/doc.css`: bu belge sayfalarının ortak teması (sitenin koyu tasarımı).
