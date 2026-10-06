@@ -38,6 +38,15 @@ function limited(ip) {
   return ++h.n > RATE_MAX;
 }
 
+// Gerçek ziyaretçi IP'si X-Forwarded-For'un İLK (en soldaki) değeridir. Railway edge'i
+// istemcinin gönderdiği X-Forwarded-For'u siler ve kendisi yazar, yani bu değer sahte olamaz.
+// SON değeri almaya kalkma: o Railway'in kendi iç/CDN IP'si olur, bütün ziyaretçiler tek IP
+// sayılır ve dakikada 20 sınırı tüm siteye uygulanır.
+// Kaynak: https://station.railway.com/questions/which-header-should-i-rely-on-for-real-c-d78a6f96
+function clientIp(req) {
+  return String(req.headers['x-forwarded-for'] || req.socket.remoteAddress || '').split(',')[0].trim();
+}
+
 function send(res, status, body, origin) {
   const headers = { 'Content-Type': 'application/json', 'Cache-Control': 'no-store', 'Vary': 'Origin' };
   if (origin) Object.assign(headers, {
@@ -55,11 +64,12 @@ http.createServer((req, res) => {
 
   if (req.method === 'OPTIONS') return send(res, origin ? 204 : 403, null, origin);
   if (req.method === 'GET' && url === '/health') return send(res, 200, { ok: true });
+  // GEÇİCİ: Railway'in sahte X-Forwarded-For'u silip silmediğini test etmek için. Testten sonra kaldırılacak.
+  if (req.method === 'GET' && url === '/__ipcheck') return send(res, 200, { ip: clientIp(req), xff: req.headers['x-forwarded-for'] || null });
   if (req.method === 'GET' && url === '/count') return send(res, 200, { count }, origin);
   if (req.method === 'POST' && url === '/hit') {
     if (!origin) return send(res, 403, { error: 'origin' });
-    const ip = String(req.headers['x-forwarded-for'] || req.socket.remoteAddress || '').split(',')[0].trim();
-    if (limited(ip)) return send(res, 429, { count }, origin);
+    if (limited(clientIp(req))) return send(res, 429, { count }, origin);
     count++;
     save();
     return send(res, 200, { count }, origin);
