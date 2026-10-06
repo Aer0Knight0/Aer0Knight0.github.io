@@ -68,9 +68,14 @@ main{padding:28px 0 8px}
 .paper a{color:#7dd3fc;text-decoration:underline;text-decoration-color:rgba(125,211,252,.35);text-underline-offset:3px}
 .paper a:hover{text-decoration-color:currentColor}
 .paper code{background:rgba(255,255,255,.08);padding:.12em .4em;border-radius:6px;font-size:.88em}
-.paper .meta{color:var(--dim);font-size:14px;margin:0 0 6px}
+.paper .meta{color:var(--dim);font-size:14px;margin:0 0 6px;display:flex;flex-wrap:wrap;column-gap:18px;row-gap:2px}
+.paper .meta span{white-space:nowrap}
 .paper .meta strong{color:var(--muted)}
-.paper .note{margin:18px 0 0;padding:16px 18px;border-radius:16px;border:1px solid rgba(147,197,253,.2);background:rgba(59,130,246,.08);font-size:15px}
+.paper .meta.sub{color:var(--muted);font-weight:600}
+.paper .note{margin:18px 0;padding:16px 18px;border-radius:16px;border:1px solid rgba(147,197,253,.2);background:rgba(59,130,246,.08);font-size:15px}
+.paper .note.warn{border-color:rgba(245,158,11,.3);background:rgba(245,158,11,.08)}
+.paper .meta+.note{margin-top:20px}
+.paper h2[id]{scroll-margin-top:84px}
 .paper table{border-collapse:separate;border-spacing:0;width:100%;margin:16px 0;font-size:15px;display:block;overflow-x:auto;
   border:1px solid var(--line);border-radius:16px}
 .paper th,.paper td{padding:11px 14px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
@@ -82,6 +87,8 @@ main{padding:28px 0 8px}
   nav .wrap{height:62px;gap:8px}
   .pill{height:38px;font-size:13.5px}
   .paper{border-radius:22px;font-size:15.5px}
+  .paper table{font-size:14px}
+  .paper th,.paper td{padding:10px 11px}
 }
 @media (max-width:380px){
   .pill.ghost span{display:none}

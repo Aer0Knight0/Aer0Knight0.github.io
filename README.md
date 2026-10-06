@@ -69,8 +69,11 @@ Her uygulamanın kendi klasörü var; ana sayfadaki kartı oraya açılır. Şim
   (`data-i18n` + `T.en`). `?lang=en` ile İngilizce açılır.
 - `dosedial/gizlilik-politikasi.html`, `kullanim-kosullari.html`, `privacy-policy.html`,
   `terms-of-use.html`: yasal metinler. Eskiden ayrı `dosedial-legal` reposundaydı, buraya taşındı.
-  Metinlerin kaynağı DoseDial reposundaki `legal/` klasörü; orada değişirse sadece
-  `<article class="card paper">` içindeki metni değiştir, çevresindeki menü ve tema kalsın.
+  **Güncel kaynak artık bu sayfalar.** DoseDial reposundaki `legal/` klasörü 9 Eylül 2026'da kaldı,
+  oradan geri kopyalama. Metni değiştirirken sadece `<article class="card paper">` içine dokun,
+  çevresindeki menü ve tema kalsın. Tarih satırı `<p class="meta"><span>…</span><span>…</span></p>`,
+  önemli uyarılar `<p class="note warn">`. Metin uygulamanın yaptığıyla birebir aynı olmalı
+  (izinler, yedek konumu, paylaşım yolları); uygulama değişirse buraya da yansıt.
 - `dosedial/kvkk-aydinlatma-metni.html`, `kvkk-notice.html`: KVKK m.10 aydınlatma metni (TR/EN).
   Gizlilik politikasındaki bilgilere dayanır; politika değişirse bunu da güncelle.
 - `dosedial/doc.css`: bu belge sayfalarının ortak teması (sitenin koyu tasarımı).
