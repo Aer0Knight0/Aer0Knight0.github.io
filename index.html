@@ -180,6 +180,8 @@ h2{font-size:clamp(28px,4.2vw,44px);letter-spacing:-.03em;line-height:1.1;font-w
 footer{padding:40px 0 56px;color:var(--dim);font-size:13px}
 footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:28px}
 footer a:hover{color:var(--ink)}
+footer .visits{display:inline-flex;align-items:center;gap:6px}
+footer .visits svg{width:14px;height:14px}
 
 /* reveal */
 .rv{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.2,.8,.2,1),transform .8s cubic-bezier(.2,.8,.2,1)}
@@ -362,6 +364,7 @@ footer a:hover{color:var(--ink)}
 <footer>
   <div class="wrap">
     <span>© <span id="yr">2026</span> Aer0Knight</span>
+    <span class="visits" id="visits" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><span id="visitsN"></span> <span data-i18n="visits">ziyaret</span></span>
     <span data-i18n="made">Türkiye'de, sevgiyle geliştirildi.</span>
   </div>
 </footer>
@@ -372,6 +375,8 @@ const LINKS = {
   instagram: 'https://www.instagram.com/aer0knight/',   // boşken Instagram butonları gizli kalır
   dosedialPlay: '' // Play'de yayına çıkınca: 'https://play.google.com/store/apps/details?id=com.dosedial.app'
 };
+// Ziyaretçi sayacı (Railway'deki counter/ servisi). Boşken sayım yapılmaz, sayaç gizli kalır.
+const COUNTER_URL = '';
 /* =========================================== */
 
 const T = {
@@ -396,7 +401,7 @@ const T = {
     v3t:'Readable for everyone', v3p:'Big text, clear colors, plain words. Easy enough for your grandparents too.',
     fEyebrow:'Stay tuned', fTitle:'Be the <span class="grad">first to see</span> what\'s next.',
     fLead:'I share the build process, short demos and launch dates on Instagram.', igSoon:'Instagram account coming soon',
-    made:'Built with love in Türkiye.'
+    made:'Built with love in Türkiye.', visits:'visits'
   }
 };
 const TR = {};
@@ -406,6 +411,12 @@ TR.playSmallLive = "Hemen indir";
 T.tr = TR;
 
 const live = !!LINKS.dosedialPlay;
+let visits = null;
+function showVisits(){
+  if(visits==null) return;
+  document.getElementById('visitsN').textContent = visits.toLocaleString(document.documentElement.lang==='en'?'en-US':'tr-TR');
+  document.getElementById('visits').hidden = false;
+}
 function setLang(l){
   const d=T[l]; document.documentElement.lang=l;
   document.querySelectorAll('[data-i18n]').forEach(e=>{const k=e.dataset.i18n; if(d[k]!=null) e.textContent=d[k]});
@@ -414,6 +425,7 @@ function setLang(l){
   document.querySelectorAll('[data-href-en]').forEach(e=>{e.dataset.hrefTr ??= e.getAttribute('href'); e.href=l==='en'?e.dataset.hrefEn:e.dataset.hrefTr});
   document.querySelectorAll('.lang button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.lang===l));
   if(live){document.querySelector('#playLink small').textContent=d.playSmallLive}
+  showVisits();
   document.title = l==='en' ? 'Aer0Knight · Mobile apps' : 'Aer0Knight · Mobil Uygulamalar';
   try{localStorage.setItem('lang',l)}catch(e){}
 }
@@ -426,6 +438,20 @@ if(LINKS.instagram){
   document.querySelectorAll('[data-link=instagram]').forEach(a=>{a.href=LINKS.instagram;a.hidden=false});
   document.querySelectorAll('[data-link-fallback=instagram]').forEach(e=>e.hidden=true);
 }
+/* ziyaretçi sayacı: aynı tarayıcı günde bir kez sayılır, sonra sadece okunur */
+if(COUNTER_URL){
+  const day=new Date().toISOString().slice(0,10);
+  let seen=null; try{seen=localStorage.getItem('visitDay')}catch(e){}
+  const hit = seen!==day;
+  fetch(COUNTER_URL.replace(/\/+$/,'')+(hit?'/hit':'/count'),{method:hit?'POST':'GET'})
+    .then(r=>r.ok?r.json():Promise.reject(r.status))
+    .then(d=>{
+      if(hit){try{localStorage.setItem('visitDay',day)}catch(e){}}
+      if(Number.isFinite(d.count)){visits=d.count; showVisits()}
+    })
+    .catch(()=>{});
+}
+
 const play=document.getElementById('playLink');
 if(live){play.href=LINKS.dosedialPlay;play.target='_blank';play.rel='noopener';play.removeAttribute('aria-disabled');
   document.querySelector('#dosedial .status').hidden=true}
