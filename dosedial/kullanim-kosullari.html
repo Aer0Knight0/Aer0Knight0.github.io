@@ -2,39 +2,35 @@
 <html lang="tr">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>DoseDial Kullanım Koşulları</title>
-<style>:root{color-scheme:light dark}
-*{box-sizing:border-box}
-body{margin:0;background:#fbfbf9;color:#1c1c1a;
- font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
-main{max-width:44rem;margin:0 auto;padding:2.5rem 1.25rem 4rem}
-h1{font-size:1.85rem;line-height:1.25;margin:0 0 .4rem;letter-spacing:-.01em}
-h2{font-size:1.15rem;margin:2.4rem 0 .6rem;padding-top:1.2rem;border-top:1px solid #e6e4de}
-h2:first-of-type{border-top:0;padding-top:0}
-p,li{margin:.7rem 0}
-ul{padding-left:1.2rem}
-strong{font-weight:600}
-code{background:#efeee9;padding:.1em .35em;border-radius:3px;font-size:.9em}
-a{color:#1a5fb4}
-table{border-collapse:collapse;width:100%;margin:1rem 0;font-size:.95rem;display:block;overflow-x:auto}
-th,td{border:1px solid #e0ded7;padding:.5rem .7rem;text-align:left;vertical-align:top}
-th{background:#f2f1ec;font-weight:600}
-.meta{color:#6b6a64;font-size:.92rem;margin:0 0 2rem}
-.back{display:inline-block;margin-bottom:1.5rem;font-size:.92rem}
-@media (prefers-color-scheme:dark){
- body{background:#16161a;color:#e6e5e0}
- h2{border-top-color:#2e2e34}
- code{background:#26262c}
- th{background:#22222a}
- th,td{border-color:#31313a}
- a{color:#7fb0ee}
- .meta{color:#9a9992}}
-</style>
+<meta name="theme-color" content="#050b24">
+<link rel="canonical" href="https://aer0knight0.github.io/dosedial/kullanim-kosullari.html">
+<link rel="alternate" hreflang="en" href="https://aer0knight0.github.io/dosedial/terms-of-use.html">
+<link rel="icon" href="../assets/dosedial-icon.webp" type="image/webp">
+<link rel="preload" href="../assets/jakarta-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="doc.css">
 </head>
 <body>
-<main>
-<a class="back" href="./?lang=tr">&larr; DoseDial</a>
+<div class="sky" aria-hidden="true"><div class="dots"></div><div class="blob b1"></div><div class="blob b2"></div></div>
+
+<nav>
+  <div class="wrap">
+    <a class="pill" href="./?lang=tr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg><img src="../assets/dosedial-icon.webp" alt="" width="24" height="24">DoseDial</a>
+    <div class="navr">
+      <a class="pill ghost" href="../" aria-label="Ana sayfa"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg><span>Ana sayfa</span></a>
+      <div class="lang" role="group" aria-label="Dil / Language"><a aria-current="true">TR</a><a href="terms-of-use.html" hreflang="en">EN</a></div>
+    </div>
+  </div>
+</nav>
+
+<main class="wrap">
+  <div class="doctabs" role="navigation" aria-label="Belgeler">
+    <a href="gizlilik-politikasi.html">Gizlilik</a>
+    <a href="kvkk-aydinlatma-metni.html">KVKK</a>
+    <a href="kullanim-kosullari.html" aria-current="page">Kullanım koşulları</a>
+  </div>
+  <article class="card paper">
 <h1>DoseDial Kullanım Koşulları</h1>
 <p class="meta"><strong>Yürürlük tarihi:</strong> 9 Eylül 2026</p>
 <p>DoseDial&#x27;i kurarak veya kullanarak bu koşulları kabul etmiş olursunuz. Kabul etmiyorsanız uygulamayı kullanmayın.</p>
@@ -69,6 +65,20 @@ th{background:#f2f1ec;font-weight:600}
 <p>Bu koşullara Türkiye Cumhuriyeti hukuku uygulanır.</p>
 <h2>11. İletişim</h2>
 <p><a href="mailto:dosedial.destek@gmail.com">dosedial.destek@gmail.com</a></p>
+  </article>
 </main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="yr">2026</span> <a href="../">Aer0Knight</a></span>
+    <span>Türkiye'de bağımsız bir mühendis tarafından geliştirildi.</span>
+  </div>
+</footer>
+<script>
+try{localStorage.setItem('lang','tr')}catch(e){}
+document.getElementById('yr').textContent=new Date().getFullYear();
+const nav=document.querySelector('nav');
+addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>8),{passive:true});
+</script>
 </body>
 </html>
