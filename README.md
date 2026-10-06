@@ -83,7 +83,8 @@ sayfası olacaksa `dosedial/` klasörünü kopyalayıp başlangıç olarak kulla
 
 ## Dosyalar
 
-- `assets/logo.svg`: Aer0Knight logosu (miğfer), favicon olarak da kullanılır
+- `assets/logo.webp`: Aer0Knight logosu (miğferli kurt). `favicon.png` (64px) ve
+  `apple-touch-icon.png` (180px) aynı görselden üretildi
 - `assets/og.jpg`: link paylaşınca çıkan önizleme görseli (1200×630), kaynağı `kaynak/og.html`
 - `assets/dosedial-*.webp`: DoseDial reposundaki `marketing/reels/gorseller*` ekranlarından 540 px genişliğe küçültülmüş
 - `counter/`: ziyaretçi sayacı servisi (Railway). GitHub Pages bunu da dosya olarak yayınlar, içinde gizli bir şey yok.
