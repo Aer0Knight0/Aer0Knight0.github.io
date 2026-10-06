@@ -28,7 +28,14 @@ Bağımlılığı yok, sadece `server.js`. Sayı volume'daki `count.json` içind
 Sayfa aynı tarayıcıyı günde bir kez sayar (`localStorage`'daki `visitDay`). Aynı gün tekrar
 gelince sadece okur. Yani sayı "günlük tekil ziyaret". Servis cevap vermezse sayaç gizli kalır.
 
+Şu anki kurulum: Railway'de `aer0knight-counter` projesi, `counter` servisi,
+adres `https://counter-production-2254.up.railway.app`, volume `/data`. `counter/` altındaki
+bir değişiklik `main`'e girince Railway kendisi yeniden deploy eder; sayfadaki değişiklikler deploy tetiklemez.
+
 ### Railway'e kurulum (bir kerelik)
+
+Baştan kurmak gerekirse:
+
 
 1. Railway → **New Project** → **Deploy from GitHub repo** → `Aer0Knight0/aer0knight0.github.io`.
 2. Servisin **Settings** sekmesi:
