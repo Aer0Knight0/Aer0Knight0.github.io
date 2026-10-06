@@ -32,7 +32,7 @@
   </div>
   <article class="card paper">
 <h1>DoseDial Privacy Policy</h1>
-<p class="meta"><strong>Effective date:</strong> 9 September 2026 <strong>Last updated:</strong> 9 September 2026</p>
+<p class="meta"><strong>Effective date:</strong> 9 September 2026 <strong>Last updated:</strong> October 6, 2026</p>
 <h2>Summary</h2>
 <p>DoseDial does not collect your data. The app uses no internet connection, asks for no account, shows no advertising and contains no analytics. Everything you enter stays on your own phone.</p>
 <p>The app&#x27;s own code makes no network requests and your health data is never sent to any server. The app does carry an internet permission, but it is added by the Google Play Services component used for barcode scanning, not by the app itself. See &quot;Camera and barcode scanning&quot; below.</p>
@@ -41,8 +41,11 @@
 <ul><li>Medication names, doses, times and instructions</li><li>A record of the doses you took or skipped</li><li>The profiles you create (for yourself and for people you care for)</li><li>Stock, expiry date and package information</li><li>Your app settings (language, theme, text size, notification preferences)</li></ul>
 <p>This is personal health information. <strong>None of it leaves your phone.</strong> As the developer we have no access to it; there is no server.</p>
 <h2>Backup</h2>
-<p>When you ask for it, the app writes your data as a JSON file into your phone&#x27;s Downloads folder. That file is entirely under your control.</p>
+<p>When you ask for it, the app writes your data as a JSON file. The phone&#x27;s &quot;save&quot; screen opens and you choose the folder and the file name. On phones without that screen the app shows its own list: Downloads/DoseDial (default), Documents/DoseDial or the app&#x27;s own folder. That file is entirely under your control.</p>
 <p>The backup file is not encrypted and contains your medication information. If you send it to someone, upload it to a cloud service or share it, that is your decision and your responsibility. The app never sends this file anywhere on its own.</p>
+<h2>Adherence report (PDF)</h2>
+<p>The adherence report PDF you create with Plus is prepared on your phone, in the app&#x27;s own folder. The app never sends this file anywhere on its own. When you tap share, the phone&#x27;s share screen opens and you choose the app the file goes to (email, messaging, a file manager and so on).</p>
+<p>The report contains your medicine names and dose records and is not encrypted. If you send it to someone, save it or upload it to a cloud service, that is your decision and your responsibility.</p>
 <h2>Camera and barcode scanning</h2>
 <p>You can scan the data matrix code on a medicine box. This is performed by the Google Play Services code scanner:</p>
 <ul><li>The app itself holds no camera permission and never accesses the camera directly</li><li>The camera image is processed on your phone; only the decoded barcode text reaches the app</li><li>No image is stored</li><li>On first use the scanner component may be downloaded to your device by Google Play Services. That connection is made by Google Play Services, not by this app, and is governed by Google&#x27;s own privacy policy</li></ul>
@@ -50,13 +53,20 @@
 <p>The scanned barcode is matched against a local medicine list shipped inside the app. <strong>No internet request is made for that lookup</strong> and no authority is notified.</p>
 <h2>Purchases</h2>
 <p>The app offers a single one-time &quot;Plus&quot; purchase. Payment is handled by Google Play. Your card details never reach the app and are never seen or stored by it. The app receives only whether the purchase was made, and stores that on your phone.</p>
+<h2>Report a problem</h2>
+<p>The app keeps an event log on your phone to tell whether alarms work correctly. This log leaves the phone only when you tap <strong>&quot;Send log&quot;</strong> under Settings &gt; Support: the phone&#x27;s share screen opens and the log is sent to <a href="mailto:dosedial.destek@gmail.com">dosedial.destek@gmail.com</a> with the app you choose (for example your email app). You can review the message or cancel before sending.</p>
+<p>The log contains: the date and time of each event, the event type (alarm scheduled, fired, notification shown, snoozed, taken, dismissed, error and similar), the medicine&#x27;s internal number in the app, the planned time, and a short technical label (alarm kind, notification channel or error name; if the app crashed, the error class names and the first lines of the app code where it happened). The email subject contains the app version number. <strong>The log contains no medicine names, no doses and no text you typed.</strong> It keeps the last 7 days and at most 2000 events.</p>
+<h2>Read aloud</h2>
+<p>The read-aloud feature uses your phone&#x27;s own text-to-speech engine. DoseDial sends no data anywhere while doing so; the text is handed only to the speech engine on the phone.</p>
+<h2>External links</h2>
+<p>Links in the app, such as the Instagram row, open outside the app, in the matching app or the browser. That service&#x27;s own privacy policy applies there.</p>
 <h2>Permissions and why they are used</h2>
 <table><thead><tr><th>Permission</th><th>Purpose</th></tr></thead><tbody><tr><td>Post notifications</td><td>Show the reminder at dose time</td></tr><tr><td>Exact alarms</td><td>Make the reminder fire at the right minute</td></tr><tr><td>Start on boot</td><td>Keep scheduled alarms after the phone restarts</td></tr><tr><td>Vibrate</td><td>Vibrate on a reminder</td></tr><tr><td>Full-screen intent</td><td>Show the alarm screen while the phone is locked</td></tr><tr><td>Foreground service (media)</td><td>Keep the alarm sound playing until you dismiss it</td></tr><tr><td>Internet, network state</td><td>Not used by the app itself; comes with the barcode scanning component</td></tr></tbody></table>
 <p>The app has no location, contacts, camera or file-reading permission.</p>
 <h2>Retention and deletion</h2>
 <p>Your data stays on your phone until you delete it. There are two ways:</p>
 <ul><li>Delete the record or profile from inside the app</li><li>Uninstall the app, which removes all of its data</li></ul>
-<p>Backup files you wrote to the Downloads folder survive uninstalling the app; you have to delete those yourself.</p>
+<p>Backup files you wrote to the phone&#x27;s shared folders (for example Downloads or Documents) survive uninstalling the app; you have to delete those yourself. A backup written to the app&#x27;s own folder is removed together with the app.</p>
 <h2>Children</h2>
 <p>The app is not directed at children and does not knowingly collect data from children. It does not collect data from anyone.</p>
 <h2>Changes</h2>

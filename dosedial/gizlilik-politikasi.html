@@ -32,7 +32,7 @@
   </div>
   <article class="card paper">
 <h1>DoseDial Gizlilik Politikası</h1>
-<p class="meta"><strong>Yürürlük tarihi:</strong> 9 Eylül 2026 <strong>Son güncelleme:</strong> 9 Eylül 2026</p>
+<p class="meta"><strong>Yürürlük tarihi:</strong> 9 Eylül 2026 <strong>Son güncelleme:</strong> 6 Ekim 2026</p>
 <h2>Özet</h2>
 <p>DoseDial verilerinizi toplamaz. Uygulama internet bağlantısı kullanmaz, hesap açmanızı istemez, reklam göstermez ve hiçbir analiz aracı içermez. Girdiğiniz her şey yalnızca kendi telefonunuzda kalır.</p>
 <p>Uygulamanın kendi kodunda hiçbir ağ isteği yoktur; sağlık verileriniz hiçbir sunucuya gönderilmez. Uygulama internet izni taşır, ancak bu izni uygulamanın kendisi değil, barkod okuma için kullanılan Google Play Hizmetleri bileşeni ekler. Ayrıntı aşağıda &quot;Kamera ve barkod tarama&quot; başlığında.</p>
@@ -41,8 +41,11 @@
 <ul><li>İlaç adları, dozları, kullanım saatleri ve talimatları</li><li>Aldığınız veya atladığınız dozların kaydı</li><li>Oluşturduğunuz profiller (kendiniz ve baktığınız kişiler için)</li><li>Stok, son kullanma tarihi ve kutu bilgileri</li><li>Uygulama ayarlarınız (dil, tema, yazı boyutu, bildirim tercihleri)</li></ul>
 <p>Bu bilgiler sağlığınıza dair kişisel verilerdir. <strong>Hiçbiri telefonunuzdan çıkmaz.</strong> Geliştirici olarak bu verilere erişimimiz yoktur; sunucumuz yoktur.</p>
 <h2>Yedekleme</h2>
-<p>Uygulama, siz istediğinizde verilerinizi bir JSON dosyası olarak telefonunuzun İndirilenler klasörüne yazar. Bu dosyanın kontrolü tamamen sizdedir.</p>
+<p>Uygulama, siz istediğinizde verilerinizi bir JSON dosyası olarak yazar. Telefonun &quot;kaydet&quot; ekranı açılır; klasörü ve dosya adını siz seçersiniz. Bu ekranı olmayan telefonlarda uygulama kendi listesini gösterir: İndirilenler/DoseDial (varsayılan), Belgeler/DoseDial veya uygulamanın kendi klasörü. Bu dosyanın kontrolü tamamen sizdedir.</p>
 <p>Yedek dosyası şifrelenmemiştir ve içinde ilaç bilgileriniz bulunur. Dosyayı başka birine gönderirseniz, bulut hizmetine yüklerseniz veya paylaşırsanız bu sizin kararınızdır ve sorumluluğu size aittir. Uygulama bu dosyayı kendiliğinden hiçbir yere göndermez.</p>
+<h2>Doz karnesi raporu (PDF)</h2>
+<p>Plus ile oluşturduğunuz doz karnesi PDF&#x27;i telefonunuzda, uygulamanın kendi klasöründe hazırlanır. Uygulama bu dosyayı kendiliğinden hiçbir yere göndermez. Paylaş dediğinizde telefonun paylaşma ekranı açılır ve dosyanın gideceği uygulamayı (e-posta, mesajlaşma, dosya yöneticisi gibi) siz seçersiniz.</p>
+<p>Rapor ilaç adlarınızı ve doz kayıtlarınızı içerir ve şifrelenmemiştir. Dosyayı birine gönderirseniz, kaydederseniz veya bir bulut hizmetine yüklerseniz bu sizin kararınızdır ve sorumluluğu size aittir.</p>
 <h2>Kamera ve barkod tarama</h2>
 <p>İlaç kutusundaki karekodu okutabilirsiniz. Bu işlem Google Play Hizmetleri&#x27;nin kod tarayıcısı tarafından yapılır:</p>
 <ul><li>Uygulamanın kendisinin kamera izni yoktur, kameraya doğrudan erişmez</li><li>Kamera görüntüsü telefonunuzda işlenir, uygulamaya yalnızca çözülmüş barkod metni gelir</li><li>Görüntü kaydedilmez</li><li>Tarayıcı bileşeni ilk kullanımda Google Play Hizmetleri tarafından cihazınıza indirilebilir; bu bağlantıyı uygulama değil, Google Play Hizmetleri kurar ve Google&#x27;ın kendi gizlilik politikasına tabidir</li></ul>
@@ -50,13 +53,20 @@
 <p>Okunan barkod, uygulamanın içinde gömülü olarak gelen yerel bir ilaç listesiyle karşılaştırılır. <strong>Bu sorgu için internete çıkılmaz</strong> ve hiçbir kuruma bildirim yapılmaz.</p>
 <h2>Satın alma</h2>
 <p>Uygulama içinde tek seferlik bir &quot;Plus&quot; satın alması bulunur. Ödeme işlemini Google Play yürütür. Kart bilgileriniz uygulamaya hiçbir zaman ulaşmaz ve uygulama tarafından görülmez, saklanmaz. Uygulama Google Play&#x27;den yalnızca satın almanın yapılıp yapılmadığı bilgisini alır ve bunu telefonunuzda saklar.</p>
+<h2>Sorun bildir</h2>
+<p>Uygulama, alarmların doğru çalışıp çalışmadığını anlamak için telefonunuzda bir olay kaydı tutar. Bu kayıt telefondan yalnızca siz Ayarlar &gt; Destek bölümünde <strong>&quot;Kaydı gönder&quot;</strong>e dokunduğunuzda çıkar: telefonun paylaşma ekranı açılır, seçtiğiniz uygulama (ör. e-posta uygulamanız) ile <a href="mailto:dosedial.destek@gmail.com">dosedial.destek@gmail.com</a> adresine gönderilir. Göndermeden önce iletiyi görebilir veya vazgeçebilirsiniz.</p>
+<p>Kayıtta şunlar bulunur: olayın tarihi ve saati, olay türü (alarm kuruldu, çaldı, bildirim gösterildi, ertelendi, alındı, kapatıldı, hata gibi), ilacın uygulama içindeki sıra numarası, planlanan saat ve kısa bir teknik etiket (alarm türü, bildirim kanalı veya hata adı; uygulama çöktüyse hatanın sınıf adı ve uygulama kodundaki ilk satırları). E-postanın konusunda uygulamanın sürüm numarası yer alır. <strong>Kayıtta ilaç adı, doz veya sizin yazdığınız bir metin bulunmaz.</strong> Kayıt son 7 günü ve en çok 2000 olayı tutar.</p>
+<h2>Sesli okuma</h2>
+<p>Sesli okuma özelliği telefonunuzun kendi metin okuma (ses) motorunu kullanır. DoseDial bu sırada hiçbir yere veri göndermez; okunacak metin yalnızca telefondaki ses motoruna verilir.</p>
+<h2>Dış bağlantılar</h2>
+<p>Uygulamadaki Instagram satırı gibi bağlantılar uygulamanın dışında, ilgili uygulamada veya tarayıcıda açılır. Orada o hizmetin kendi gizlilik politikası geçerlidir.</p>
 <h2>İzinler ve ne için kullanıldıkları</h2>
 <table><thead><tr><th>İzin</th><th>Ne için</th></tr></thead><tbody><tr><td>Bildirim gönderme</td><td>İlaç saatinde hatırlatma göstermek</td></tr><tr><td>Tam zamanlı alarm</td><td>Hatırlatmanın doğru dakikada çalması</td></tr><tr><td>Cihaz açılışında başlatma</td><td>Telefon yeniden başlatıldığında kurulu alarmların kaybolmaması</td></tr><tr><td>Titreşim</td><td>Hatırlatmada titretmek</td></tr><tr><td>Tam ekran bildirim</td><td>Telefon kilitliyken alarm ekranını gösterebilmek</td></tr><tr><td>Ön plan hizmeti (medya)</td><td>Alarm sesinin siz kapatana kadar çalmaya devam etmesi</td></tr><tr><td>İnternet, ağ durumu</td><td>Uygulamanın kendisi kullanmaz; barkod okuma bileşeniyle birlikte gelir</td></tr></tbody></table>
 <p>Uygulamanın konum, rehber, kamera veya dosya okuma izni yoktur.</p>
 <h2>Verilerin saklanması ve silinmesi</h2>
 <p>Verileriniz siz silene kadar telefonunuzda kalır. İki şekilde silinir:</p>
 <ul><li>Uygulama içinden ilgili kaydı veya profili silerek</li><li>Uygulamayı telefondan kaldırarak - bu, uygulamanın tüm verisini siler</li></ul>
-<p>İndirilenler klasörüne yazdığınız yedek dosyaları uygulamayı kaldırsanız da kalır; onları kendiniz silmelisiniz.</p>
+<p>Telefonun ortak klasörlerine (ör. İndirilenler veya Belgeler) yazdığınız yedek dosyaları uygulamayı kaldırsanız da kalır; onları kendiniz silmelisiniz. Uygulamanın kendi klasörüne yazılan yedek ise uygulamayla birlikte silinir.</p>
 <h2>Çocuklar</h2>
 <p>Uygulama çocuklara yönelik değildir ve çocuklardan bilerek veri toplamaz. Zaten hiç kimseden veri toplamamaktadır.</p>
 <h2>Değişiklikler</h2>
