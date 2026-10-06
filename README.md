@@ -14,7 +14,7 @@ Kaynak bu repo. `main`'e push edilen her şey GitHub Pages'te birkaç dakika iç
 |---|---|
 | `instagram` | Şu an `https://www.instagram.com/aer0knight/`. Boşken Instagram butonları gizli, yerine "çok yakında" rozeti görünür. |
 | `COUNTER_URL` | Railway'deki sayaç servisinin adresi (aşağıya bak). Boşken sayım yapılmaz, footer'daki sayaç gizli kalır. |
-| `dosedialPlay` | DoseDial Play'de yayına çıkınca. Dolunca rozet "Hemen indir" olur, "Kapalı testte" etiketi kalkar. |
+| `dosedialPlay` | DoseDial Play'de yayına çıkınca. Dolunca rozet "Hemen indir" olur, "Kapalı testte" etiketi kalkar. Aynı linki `dosedial/index.html`'deki `PLAY` ayarına da yaz. |
 
 ## Ziyaretçi sayacı (`counter/`)
 
@@ -55,11 +55,27 @@ Kontrol: tarayıcıda `https://<adres>/count` açınca `{"count":0}` görünmeli
 Lokal deneme: `cd counter && ALLOWED_ORIGINS=http://localhost:8000 PORT=8787 node server.js`,
 sonra `index.html`'de `COUNTER_URL = 'http://localhost:8787'`.
 
+## Uygulama sayfaları
+
+Her uygulamanın kendi klasörü var; ana sayfadaki kartı oraya açılır. Şimdilik sadece DoseDial:
+
+- `dosedial/index.html`: tanıtım, gizlilik özeti, gizlilik politikası ve kullanım koşulları
+  linkleri, SSS (açılır-kapanır sorular) ve destek e-postası. TR/EN aynı ana sayfadaki gibi
+  (`data-i18n` + `T.en`). `?lang=en` ile İngilizce açılır.
+- `dosedial/gizlilik-politikasi.html`, `kullanim-kosullari.html`, `privacy-policy.html`,
+  `terms-of-use.html`: yasal metinler. Eskiden ayrı `dosedial-legal` reposundaydı, buraya taşındı.
+  Metinlerin kaynağı DoseDial reposundaki `legal/` klasörü; orada değişirse buraya da kopyala.
+- `dosedial-legal/*.html`: eski adresler (`/dosedial-legal/...`) için yönlendirme. Uygulamanın
+  içinde ve Play Console'da bu adresler kayıtlı, o yüzden silme. `dosedial-legal` reposu
+  silinince (ya da onun Pages'i kapatılınca) bu klasör devreye girer ve eski linkler yeni
+  sayfalara gider.
+
 ## Yeni uygulama eklemek
 
 "Yakında" kartlarından birini (`<article class="card soon">`) açık bir uygulama kartına çevir.
 DoseDial kartı (`<article class="card feat">`) örnek alınabilir. Metinler Türkçe olarak HTML'de,
-İngilizceleri `T.en` sözlüğünde durur. `data-i18n` anahtarı ikisinde de aynı olmalı.
+İngilizceleri `T.en` sözlüğünde durur. `data-i18n` anahtarı ikisinde de aynı olmalı. Kendi
+sayfası olacaksa `dosedial/` klasörünü kopyalayıp başlangıç olarak kullan.
 
 ## Dosyalar
 

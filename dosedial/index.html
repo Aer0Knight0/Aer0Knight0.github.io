@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DoseDial · İlaç hatırlatıcı</title>
+<meta name="description" content="DoseDial: tam ekran alarm, doz karnesi ve aile profilleriyle internetsiz, hesapsız ilaç hatırlatıcı. Gizlilik, kullanım koşulları ve sık sorulan sorular.">
+<meta name="theme-color" content="#050b24">
+<meta property="og:type" content="website">
+<meta property="og:title" content="DoseDial · İlaç hatırlatıcı">
+<meta property="og:description" content="İlaçlarını hiç unutma. İnternetsiz, hesapsız, reklamsız.">
+<meta property="og:image" content="https://aer0knight0.github.io/assets/og.jpg">
+<meta property="og:url" content="https://aer0knight0.github.io/dosedial/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="../assets/dosedial-icon.webp" type="image/webp">
+<link rel="preload" href="../assets/jakarta-latin.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face{font-family:'Jakarta';font-style:normal;font-weight:200 800;font-display:swap;src:url(../assets/jakarta-latin.woff2) format('woff2');
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Jakarta';font-style:normal;font-weight:200 800;font-display:swap;src:url(../assets/jakarta-latin-ext.woff2) format('woff2');
+  unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+
+:root{
+  --bg:#050b24; --bg2:#081544; --ink:#f8fafc; --muted:#a5b0cc; --dim:#6b7697;
+  --line:rgba(255,255,255,.09); --glass:rgba(255,255,255,.035);
+  --blue:#3B82F6; --sky:#38BDF8; --violet:#8B5CF6; --amber:#F59E0B;
+  --grad:linear-gradient(90deg,#7dd3fc,#60a5fa 45%,#a78bfa);
+  --r:28px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:'Jakarta',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--ink);
+  line-height:1.55;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+.wrap{width:min(1160px,100% - 32px);margin-inline:auto}
+
+/* ---------- background ---------- */
+.sky{position:fixed;inset:0;z-index:-1;overflow:hidden;background:radial-gradient(120% 90% at 50% 0%,#0b1d5c 0%,var(--bg2) 35%,var(--bg) 75%)}
+.sky .dots{position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.075) 1.2px,transparent 1.3px);background-size:34px 34px;
+  -webkit-mask-image:radial-gradient(80% 60% at 50% 20%,#000 30%,transparent 80%);mask-image:radial-gradient(80% 60% at 50% 20%,#000 30%,transparent 80%)}
+.blob{position:absolute;border-radius:50%;filter:blur(20px);opacity:.9;will-change:transform}
+.b1{width:720px;height:720px;left:-220px;top:-260px;background:radial-gradient(circle,rgba(29,78,216,.55),transparent 65%);animation:drift 22s ease-in-out infinite alternate}
+.b2{width:640px;height:640px;right:-240px;top:120px;background:radial-gradient(circle,rgba(139,92,246,.32),transparent 65%);animation:drift 28s ease-in-out infinite alternate-reverse}
+@keyframes drift{to{transform:translate3d(80px,60px,0) scale(1.12)}}
+
+/* ---------- nav ---------- */
+nav{position:sticky;top:0;z-index:20;backdrop-filter:blur(14px) saturate(140%);-webkit-backdrop-filter:blur(14px) saturate(140%);
+  background:linear-gradient(to bottom,rgba(5,11,36,.75),rgba(5,11,36,.35));border-bottom:1px solid transparent;transition:border-color .3s}
+nav.scrolled{border-bottom-color:var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:68px;gap:12px}
+.brand{display:flex;align-items:center;gap:11px;font-weight:800;font-size:18px;letter-spacing:-.01em}
+.brand img{width:36px;height:36px;border-radius:11px;box-shadow:0 6px 20px rgba(59,130,246,.35)}
+.brand small{display:block;font-weight:600;font-size:11px;color:var(--dim);letter-spacing:.14em;text-transform:uppercase;margin-top:-3px}
+.navr{display:flex;align-items:center;gap:8px}
+.lang{display:flex;padding:3px;border:1px solid var(--line);border-radius:999px;background:var(--glass)}
+.lang button{all:unset;cursor:pointer;font-size:12px;font-weight:700;letter-spacing:.06em;padding:6px 11px;border-radius:999px;color:var(--muted);transition:.2s}
+.lang button[aria-pressed=true]{background:rgba(255,255,255,.1);color:var(--ink)}
+.lang button:focus-visible{outline:2px solid var(--sky)}
+.tabs{display:flex;gap:4px}
+.tabs a{font-size:13px;font-weight:700;color:var(--muted);padding:8px 12px;border-radius:999px;transition:.2s}
+.tabs a:hover{color:var(--ink);background:rgba(255,255,255,.06)}
+
+/* ---------- hero ---------- */
+.hero{display:grid;grid-template-columns:1.05fr 1fr;gap:24px;align-items:center;padding:clamp(36px,6vw,72px) 0 clamp(24px,4vw,48px)}
+.hero .body{display:flex;flex-direction:column;gap:20px}
+.apphead{display:flex;align-items:center;gap:16px}
+.appicon{width:84px;height:84px;border-radius:24px;box-shadow:0 14px 40px rgba(37,99,235,.5),0 0 0 1px rgba(255,255,255,.12)}
+h1{font-size:clamp(36px,5vw,52px);font-weight:800;letter-spacing:-.035em;line-height:1}
+.appcat{font-size:14px;color:var(--dim);font-weight:600;margin-top:6px}
+.tagline{font-size:clamp(26px,3.4vw,38px);font-weight:800;letter-spacing:-.025em;line-height:1.12}
+.grad{background:var(--grad);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 8s ease-in-out infinite alternate}
+@keyframes shine{to{background-position:100% 0}}
+.desc{color:var(--muted);max-width:48ch;font-size:17px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;padding:7px 12px;border-radius:999px;background:rgba(255,255,255,.05);border:1px solid var(--line);color:#dbe4f5}
+.status{display:inline-flex;align-items:center;gap:9px;align-self:flex-start;font-size:12.5px;font-weight:700;letter-spacing:.03em;padding:7px 13px;border-radius:999px;
+  color:#fde68a;background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.28)}
+.pulse{width:8px;height:8px;border-radius:50%;background:var(--amber);animation:pulseA 2.2s infinite}
+@keyframes pulseA{0%{box-shadow:0 0 0 0 rgba(245,158,11,.7)}70%{box-shadow:0 0 0 9px rgba(245,158,11,0)}100%{box-shadow:0 0 0 0 rgba(245,158,11,0)}}
+.play{display:inline-flex;align-self:flex-start;align-items:center;gap:12px;height:56px;padding:0 20px 0 16px;border-radius:16px;background:#000;border:1px solid rgba(255,255,255,.18);transition:.2s}
+.play svg{width:26px;height:26px}
+.play span{display:flex;flex-direction:column;line-height:1.15;font-weight:700;font-size:17px}
+.play small{font-size:10.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#cbd5e1}
+.play[aria-disabled=true]{cursor:default;opacity:.85}
+.play:not([aria-disabled=true]):hover{transform:translateY(-2px);border-color:rgba(255,255,255,.35)}
+
+.stage{position:relative;min-height:500px;overflow:hidden}
+.stage::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 60% at 55% 50%,rgba(59,130,246,.38),transparent 70%)}
+.ring{position:absolute;left:55%;top:50%;width:520px;height:520px;translate:-50% -50%;border-radius:50%;border:1px dashed rgba(147,197,253,.18);animation:spin 60s linear infinite}
+@keyframes spin{to{rotate:360deg}}
+.phone{position:absolute;width:236px;border-radius:38px;padding:8px;background:linear-gradient(145deg,#2b3247,#0b0f1c 60%,#262c40);
+  box-shadow:0 40px 80px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.08),inset 0 0 0 1px rgba(255,255,255,.06)}
+.phone img{border-radius:31px;width:100%;height:auto;aspect-ratio:540/1171;object-fit:cover;background:#0b1430}
+.phone.p1{left:12%;top:56px;rotate:-8deg;z-index:2}
+.phone.p2{left:50%;top:22px;rotate:7deg}
+
+/* ---------- sections ---------- */
+section{padding:clamp(36px,6vw,72px) 0;scroll-margin-top:68px}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--sky)}
+h2{font-size:clamp(28px,4.2vw,44px);letter-spacing:-.03em;line-height:1.1;font-weight:800;margin:8px 0 12px}
+.slead{color:var(--muted);max-width:56ch;margin-bottom:28px}
+.card{border-radius:var(--r);border:1px solid var(--line);background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.015))}
+
+.facts{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.fact{padding:22px 24px;display:flex;gap:14px;align-items:flex-start}
+.fact .ic{flex:none;width:40px;height:40px;border-radius:12px;display:grid;place-items:center;font-size:19px;
+  background:linear-gradient(135deg,rgba(59,130,246,.25),rgba(139,92,246,.2));border:1px solid rgba(147,197,253,.2)}
+.fact b{display:block;font-size:16px;margin-bottom:3px}
+.fact p{color:var(--muted);font-size:14.5px}
+
+.docs{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:14px}
+.doc{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 24px;transition:border-color .25s,transform .25s}
+.doc:hover{border-color:rgba(147,197,253,.3);transform:translateY(-2px)}
+.doc b{display:block;font-size:17px}
+.doc span{color:var(--dim);font-size:13.5px;font-weight:600}
+.doc svg{flex:none;width:20px;height:20px;color:var(--sky)}
+
+.faq{display:flex;flex-direction:column;gap:10px}
+.faq details{border-radius:20px;border:1px solid var(--line);background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.015));transition:border-color .25s}
+.faq details[open]{border-color:rgba(147,197,253,.25)}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 22px;font-weight:700;font-size:16.5px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary:focus-visible{outline:2px solid var(--sky);border-radius:20px}
+.faq summary::after{content:"+";flex:none;width:28px;height:28px;border-radius:9px;display:grid;place-items:center;font-size:20px;font-weight:600;
+  color:var(--sky);background:rgba(56,189,248,.1);transition:transform .25s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq .a{padding:0 22px 20px;color:var(--muted);max-width:72ch}
+.faq .a p+p{margin-top:8px}
+.faq .a b{color:var(--ink);font-weight:700}
+
+.contact{margin-top:22px;padding:24px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px}
+.contact p{color:var(--muted)}
+.contact a{color:var(--sky);font-weight:700}
+
+footer{padding:40px 0 56px;color:var(--dim);font-size:13px}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:28px}
+footer a:hover{color:var(--ink)}
+[hidden]{display:none!important}
+
+@media (max-width:900px){
+  .hero{grid-template-columns:1fr}
+  .stage{min-height:420px;order:-1}
+  .phone{width:196px}
+  .phone.p1{left:calc(50% - 180px)}
+  .phone.p2{left:calc(50% - 10px)}
+  .ring{left:50%}
+  .facts,.docs{grid-template-columns:1fr}
+}
+@media (max-width:640px){
+  .brand small,.tabs{display:none}
+  .stage{min-height:360px}
+  .phone{width:168px;border-radius:32px;padding:7px}
+  .phone img{border-radius:26px}
+  .phone.p1{left:calc(50% - 158px);top:36px}
+  .phone.p2{left:calc(50% - 8px);top:14px}
+  .faq summary{padding:16px 18px;font-size:15.5px}
+  .faq .a{padding:0 18px 18px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+<div class="sky" aria-hidden="true"><div class="blob b1"></div><div class="blob b2"></div><div class="dots"></div></div>
+
+<nav>
+  <div class="wrap">
+    <a class="brand" href="../" aria-label="Aer0Knight">
+      <img src="../assets/logo.svg" alt="" width="36" height="36">
+      <span>Aer0Knight<small data-i18n="brandSub">Mobil uygulamalar</small></span>
+    </a>
+    <div class="navr">
+      <div class="tabs">
+        <a href="#gizlilik" data-i18n="navPrivacy">Gizlilik</a>
+        <a href="#sss" data-i18n="navFaq">SSS</a>
+      </div>
+      <div class="lang" role="group" aria-label="Dil / Language">
+        <button type="button" data-lang="tr" aria-pressed="true">TR</button>
+        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <header class="hero wrap">
+    <div class="body">
+      <div class="apphead">
+        <img class="appicon" src="../assets/dosedial-icon.webp" alt="DoseDial" width="84" height="84">
+        <div><h1>DoseDial</h1><div class="appcat" data-i18n="ddCat">Sağlık · İlaç hatırlatıcı</div></div>
+      </div>
+      <span class="status"><span class="pulse"></span><span data-i18n="ddStatus">Kapalı testte · Çok yakında</span></span>
+      <div class="tagline" data-i18n-html="ddTag">İlaçlarını <span class="grad">hiç unutma.</span></div>
+      <p class="desc" data-i18n="ddDesc">Vakti gelince tam ekran alarm çalar, içtiğin her dozu kaydeder, ne içtiğini ve neyi kaçırdığını karnede gösterir. Annenin, babanın ilaçlarını da aynı yerden takip edersin.</p>
+      <div class="chips">
+        <span class="chip" data-i18n="ddC1">⏰ Tam ekran alarm</span>
+        <span class="chip" data-i18n="ddC2">📋 Doz karnesi</span>
+        <span class="chip" data-i18n="ddC3">👨‍👩‍👧 Aile profilleri</span>
+        <span class="chip" data-i18n="ddC4">🔒 İnternetsiz, hesapsız</span>
+      </div>
+      <a class="play" id="playLink" href="#" aria-disabled="true">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#00d7fe" d="M3.6 1.8 13.4 12 3.6 22.2c-.4-.2-.6-.7-.6-1.2V3c0-.5.2-1 .6-1.2Z"/><path fill="#ffce00" d="m16.8 8.6-3.4 3.4 3.4 3.4 3.8-2.2c1.1-.6 1.1-1.8 0-2.4l-3.8-2.2Z"/><path fill="#00f076" d="M3.6 1.8c.3-.2.8-.2 1.3.1l11.9 6.7-3.4 3.4L3.6 1.8Z"/><path fill="#ff3a44" d="m13.4 12 3.4 3.4-11.9 6.7c-.5.3-1 .3-1.3.1L13.4 12Z"/></svg>
+        <span><small data-i18n="playSmall">Çok yakında</small>Google Play</span>
+      </a>
+    </div>
+    <div class="stage" aria-hidden="true">
+      <div class="ring"></div>
+      <div class="phone p1"><img data-src-tr="../assets/dosedial-home-tr.webp" data-src-en="../assets/dosedial-home-en.webp" src="../assets/dosedial-home-tr.webp" alt="" width="540" height="1171"></div>
+      <div class="phone p2"><img data-src-tr="../assets/dosedial-alarm-tr.webp" data-src-en="../assets/dosedial-alarm-en.webp" src="../assets/dosedial-alarm-tr.webp" alt="" width="540" height="1171"></div>
+    </div>
+  </header>
+
+  <!-- Gizlilik ve yasal metinler -->
+  <section id="gizlilik">
+    <div class="wrap">
+      <div class="eyebrow" data-i18n="pEyebrow">Gizlilik · KVKK</div>
+      <h2 data-i18n="pTitle">Verin telefonunda kalır.</h2>
+      <p class="slead" data-i18n="pLead">Kısaca özetledim. Tüm ayrıntılar aşağıdaki gizlilik politikasında ve kullanım koşullarında.</p>
+      <div class="facts">
+        <div class="card fact"><div class="ic">📵</div><div><b data-i18n="f1t">Veri toplanmaz</b><p data-i18n="f1p">Hesap yok, reklam yok, analiz aracı yok. Uygulamanın kendi kodunda hiçbir ağ isteği yok.</p></div></div>
+        <div class="card fact"><div class="ic">📱</div><div><b data-i18n="f2t">Her şey cihazında</b><p data-i18n="f2p">İlaçların, dozların ve profillerin yalnızca telefonundaki veritabanında durur. Sunucu yok, geliştirici olarak ben de göremem.</p></div></div>
+        <div class="card fact"><div class="ic">💾</div><div><b data-i18n="f3t">Yedek senin kontrolünde</b><p data-i18n="f3p">Yedek dosyasını sen istediğinde oluşturursun. Uygulama onu kendiliğinden hiçbir yere göndermez.</p></div></div>
+        <div class="card fact"><div class="ic">🗑️</div><div><b data-i18n="f4t">Silmek kolay</b><p data-i18n="f4p">Kaydı ya da profili uygulama içinden silebilirsin. Uygulamayı kaldırınca tüm verisi de silinir.</p></div></div>
+      </div>
+      <div class="docs">
+        <a class="card doc" href="gizlilik-politikasi.html" data-href-en="privacy-policy.html">
+          <div><b data-i18n="dPrivacy">Gizlilik Politikası</b><span data-i18n="dPrivacySub">Hangi veriler işlenir, nerede kalır, izinler ne için</span></div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a class="card doc" href="kullanim-kosullari.html" data-href-en="terms-of-use.html">
+          <div><b data-i18n="dTerms">Kullanım Koşulları</b><span data-i18n="dTermsSub">Uygulamanın amacı ve sorumluluk sınırları</span></div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sık sorulan sorular -->
+  <section id="sss">
+    <div class="wrap">
+      <div class="eyebrow" data-i18n="qEyebrow">SSS</div>
+      <h2 data-i18n="qTitle">Sık sorulan sorular</h2>
+      <p class="slead" data-i18n="qLead">Aklına takılan bir şey burada yoksa bana yaz, cevaplayayım.</p>
+      <div class="faq">
+        <details><summary data-i18n="q1">DoseDial ücretli mi?</summary>
+          <div class="a"><p data-i18n-html="a1">Temel özellikler <b>ücretsiz</b>: hatırlatma, tam ekran alarm ve doz karnesi. İstersen tek seferlik <b>DoseDial Plus</b> satın alabilirsin; abonelik yok. Plus ile birden fazla profil, karekod okutma ve evdeki ilaçlar, stok takibi, PDF uyum raporu ve sıradaki dozu sesli söyleme açılır.</p></div></details>
+        <details><summary data-i18n="q2">İnternet ya da hesap gerekiyor mu?</summary>
+          <div class="a"><p data-i18n="a2">Hayır. Uygulama internetsiz çalışır, hesap açmanı istemez. Tek istisna: karekod tarayıcı bileşenini ilk kullanımda Google Play Hizmetleri indirebilir. Bu bağlantıyı DoseDial değil, Google Play Hizmetleri kurar.</p></div></details>
+        <details><summary data-i18n="q3">Verilerimi kim görebilir?</summary>
+          <div class="a"><p data-i18n="a3">Sadece sen. Girdiğin her şey telefonunda kalır; sunucu yok, ben de göremem. Karekod okuturken bile sorgu, uygulamanın içinde gelen ilaç listesinde yapılır, hiçbir kuruma bildirim gitmez.</p></div></details>
+        <details><summary data-i18n="q4">Telefonumu değiştirirsem kayıtlarım ne olur?</summary>
+          <div class="a"><p data-i18n-html="a4">Eski telefonda <b>Ayarlar › Veri › Veri Yedekleme (Aktarım)</b> bölümünden yedek al, dosyayı yeni telefona taşı ve aynı yerden <b>Geri Yükle</b>'ye dokun. Geri yükleme o telefondaki mevcut kayıtların yerine yedektekileri koyar.</p><p data-i18n="a4b">Yedek dosyası şifrelenmemiştir ve ilaç bilgilerini içerir; kimle paylaştığına dikkat et.</p></div></details>
+        <details><summary data-i18n="q5">Telefon kilitliyken ya da yeniden başlayınca alarm çalar mı?</summary>
+          <div class="a"><p data-i18n="a5">Evet. Kilit ekranında tam ekran alarm açılır ve ses sen kapatana kadar çalar. Telefon yeniden başladığında kurulu alarmlar da geri yüklenir.</p></div></details>
+        <details><summary data-i18n="q6">Alarm çalmadı, ne yapmalıyım?</summary>
+          <div class="a"><p data-i18n="a6">Önce telefon ayarlarından DoseDial'ın bildirim, alarm ve tam ekran bildirim izinlerinin açık olduğunu kontrol et. Bazı telefon markalarının pil tasarrufu ayarları arka planda çalışan uygulamaları kısıtlayabilir; DoseDial için bu kısıtlamayı kapatmanı öneririm. Sorun sürerse telefon modelinle birlikte bana yaz.</p></div></details>
+        <details><summary data-i18n="q7">Annemin, babamın ilaçlarını da takip edebilir miyim?</summary>
+          <div class="a"><p data-i18n="a7">Evet. Plus ile her kişi için ayrı profil açarsın; ilaçlar, alarmlar ve karneler profil profil ayrı tutulur.</p></div></details>
+        <details><summary data-i18n="q8">DoseDial tıbbi tavsiye veriyor mu?</summary>
+          <div class="a"><p data-i18n="a8">Hayır. DoseDial bir hatırlatma ve kayıt aracıdır, tıbbi cihaz değildir. Hangi ilacı ne zaman ve ne kadar alacağına doktorun ya da eczacın karar verir.</p></div></details>
+        <details><summary data-i18n="q9">Hangi telefonlarda çalışır, ne zaman çıkacak?</summary>
+          <div class="a"><p data-i18n="a9">Android 8.0 ve üzeri telefonlarda çalışır. Şu an kapalı testte; Google Play'de yayına çıkınca bu sayfadaki buton aktif olacak.</p></div></details>
+      </div>
+      <div class="card contact">
+        <p data-i18n="cLead">Sorun, öneri ya da veri talebin mi var?</p>
+        <a href="mailto:dosedial.destek@gmail.com">dosedial.destek@gmail.com</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="yr">2026</span> <a href="../">Aer0Knight</a></span>
+    <span data-i18n="made">Türkiye'de bağımsız bir mühendis tarafından geliştirildi.</span>
+  </div>
+</footer>
+
+<script>
+/* ======== Ayarlar ======== */
+const PLAY = ''; // Play'de yayına çıkınca: 'https://play.google.com/store/apps/details?id=com.dosedial.app'
+/* ========================= */
+
+const T = {
+  en:{
+    brandSub:'Mobile apps', navPrivacy:'Privacy', navFaq:'FAQ',
+    ddCat:'Health · Medication reminder', ddStatus:'In closed testing · Coming soon',
+    ddTag:'Never miss <span class="grad">a dose again.</span>',
+    ddDesc:'A full-screen alarm rings right on time, every dose you take is logged, and the report shows what you took and what you missed. Track your parents\' medicines from the same place.',
+    ddC1:'⏰ Full-screen alarm', ddC2:'📋 Dose report', ddC3:'👨‍👩‍👧 Family profiles', ddC4:'🔒 Offline, no account',
+    playSmall:'Coming soon', playSmallLive:'Get it on',
+    pEyebrow:'Privacy', pTitle:'Your data stays on your phone.',
+    pLead:'Here is the short version. The full details are in the privacy policy and terms of use below.',
+    f1t:'No data collected', f1p:'No account, no ads, no analytics. The app\'s own code makes no network requests.',
+    f2t:'Everything on your device', f2p:'Your medicines, doses and profiles live only in the database on your phone. There is no server; not even I can see them.',
+    f3t:'Backups are yours', f3p:'You create a backup file only when you ask for one. The app never sends it anywhere on its own.',
+    f4t:'Easy to delete', f4p:'Delete a record or profile inside the app. Uninstalling the app deletes all of its data.',
+    dPrivacy:'Privacy Policy', dPrivacySub:'What data is processed, where it stays, what permissions are for',
+    dTerms:'Terms of Use', dTermsSub:'What the app is for, and the limits of liability',
+    qEyebrow:'FAQ', qTitle:'Frequently asked questions', qLead:'If your question isn\'t here, write to me and I\'ll answer.',
+    q1:'Is DoseDial free?',
+    a1:'The core features are <b>free</b>: reminders, the full-screen alarm and the dose report. You can buy <b>DoseDial Plus</b> once if you want; there is no subscription. Plus unlocks multiple profiles, box barcode scanning and medicines at home, stock tracking, a PDF adherence report and spoken next dose.',
+    q2:'Do I need internet or an account?',
+    a2:'No. The app works offline and never asks you to sign up. The one exception: Google Play services may download the barcode scanner component the first time you use it. That connection is made by Google Play services, not by DoseDial.',
+    q3:'Who can see my data?',
+    a3:'Only you. Everything you enter stays on your phone; there is no server and I can\'t see it either. Even barcode lookups run against a medicine list bundled inside the app, and nothing is reported to any authority.',
+    q4:'What happens to my records if I change phones?',
+    a4:'On the old phone, make a backup from <b>Settings › Data › Data Backup (Transfer)</b>, move the file to the new phone and tap <b>Restore</b> in the same place. Restoring replaces the records on that phone with the ones in the backup.',
+    a4b:'The backup file is not encrypted and contains your medicine information, so be careful who you share it with.',
+    q5:'Does the alarm ring when the phone is locked or restarts?',
+    a5:'Yes. A full-screen alarm opens over the lock screen and keeps ringing until you turn it off. Scheduled alarms are restored after the phone restarts.',
+    q6:'The alarm didn\'t ring. What should I do?',
+    a6:'First check in your phone settings that DoseDial\'s notification, alarm and full-screen notification permissions are on. Battery saver settings on some phone brands can restrict apps running in the background; I recommend turning that restriction off for DoseDial. If it still happens, write to me with your phone model.',
+    q7:'Can I track my parents\' medicines too?',
+    a7:'Yes. With Plus you create a separate profile for each person; medicines, alarms and reports are kept apart per profile.',
+    q8:'Does DoseDial give medical advice?',
+    a8:'No. DoseDial is a reminder and record-keeping tool, not a medical device. Your doctor or pharmacist decides which medicine to take, when and how much.',
+    q9:'Which phones does it run on, and when is it out?',
+    a9:'It runs on Android 8.0 and later. It is in closed testing right now; the button on this page goes live once it is on Google Play.',
+    cLead:'Have a problem, an idea or a data request?',
+    made:'Built by an independent engineer in Türkiye.'
+  }
+};
+const TR = {};
+document.querySelectorAll('[data-i18n]').forEach(e=>TR[e.dataset.i18n]=e.textContent);
+document.querySelectorAll('[data-i18n-html]').forEach(e=>TR[e.dataset.i18nHtml]=e.innerHTML);
+TR.playSmallLive = 'Hemen indir';
+T.tr = TR;
+
+function setLang(l){
+  const d=T[l]; document.documentElement.lang=l;
+  document.querySelectorAll('[data-i18n]').forEach(e=>{const k=e.dataset.i18n; if(d[k]!=null) e.textContent=d[k]});
+  document.querySelectorAll('[data-i18n-html]').forEach(e=>{const k=e.dataset.i18nHtml; if(d[k]!=null) e.innerHTML=d[k]});
+  document.querySelectorAll('[data-src-tr]').forEach(e=>e.src=e.dataset['src'+(l==='en'?'En':'Tr')]);
+  document.querySelectorAll('[data-href-en]').forEach(e=>{e.dataset.hrefTr ??= e.getAttribute('href'); e.href=l==='en'?e.dataset.hrefEn:e.dataset.hrefTr});
+  document.querySelectorAll('.lang button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.lang===l));
+  if(PLAY){document.querySelector('#playLink small').textContent=d.playSmallLive}
+  document.title = l==='en' ? 'DoseDial · Medication reminder' : 'DoseDial · İlaç hatırlatıcı';
+  try{localStorage.setItem('lang',l)}catch(e){}
+}
+document.querySelectorAll('.lang button').forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.lang)));
+// ?lang=en (yasal sayfalardan dönüş) > kayıtlı tercih > tarayıcı dili
+let saved=new URLSearchParams(location.search).get('lang');
+if(!T[saved]){saved=null; try{saved=localStorage.getItem('lang')}catch(e){}}
+setLang(T[saved] ? saved : (/^tr\b/i.test(navigator.language||'tr') ? 'tr' : 'en'));
+
+const play=document.getElementById('playLink');
+if(PLAY){play.href=PLAY;play.target='_blank';play.rel='noopener';play.removeAttribute('aria-disabled');
+  document.querySelector('.status').hidden=true}
+else{play.addEventListener('click',e=>e.preventDefault())}
+
+const nav=document.querySelector('nav');
+addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>8),{passive:true});
+document.getElementById('yr').textContent=new Date().getFullYear();
+</script>
+</body>
+</html>

@@ -124,6 +124,11 @@ h2{font-size:clamp(28px,4.2vw,44px);letter-spacing:-.03em;line-height:1.1;font-w
 .play:not([aria-disabled=true]):hover{transform:translateY(-2px);border-color:rgba(255,255,255,.35)}
 .legal{display:flex;gap:16px;font-size:13px;color:var(--dim);font-weight:600}
 .legal a:hover{color:var(--ink)}
+.more{display:inline-flex;align-items:center;gap:8px;height:56px;padding:0 20px;border-radius:16px;font-weight:700;font-size:15px;
+  border:1px solid var(--line);background:var(--glass);transition:.2s}
+.more svg{width:18px;height:18px}
+.more:hover{background:rgba(255,255,255,.08);transform:translateY(-2px)}
+#dosedial{cursor:pointer}
 
 .stage{position:relative;min-height:440px;overflow:hidden}
 .stage::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 60% at 60% 50%,rgba(59,130,246,.38),transparent 70%)}
@@ -283,9 +288,12 @@ footer .visits svg{width:14px;height:14px}
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#00d7fe" d="M3.6 1.8 13.4 12 3.6 22.2c-.4-.2-.6-.7-.6-1.2V3c0-.5.2-1 .6-1.2Z"/><path fill="#ffce00" d="m16.8 8.6-3.4 3.4 3.4 3.4 3.8-2.2c1.1-.6 1.1-1.8 0-2.4l-3.8-2.2Z"/><path fill="#00f076" d="M3.6 1.8c.3-.2.8-.2 1.3.1l11.9 6.7-3.4 3.4L3.6 1.8Z"/><path fill="#ff3a44" d="m13.4 12 3.4 3.4-11.9 6.7c-.5.3-1 .3-1.3.1L13.4 12Z"/></svg>
                 <span><small data-i18n="playSmall">Çok yakında</small>Google Play</span>
               </a>
+              <a class="more" href="dosedial/"><span data-i18n="ddMore">Uygulama sayfası</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
               <div class="legal">
-                <a href="https://aer0knight0.github.io/dosedial-legal/gizlilik-politikasi.html" data-href-en="https://aer0knight0.github.io/dosedial-legal/privacy-policy.html" data-i18n="privacy">Gizlilik</a>
-                <a href="https://aer0knight0.github.io/dosedial-legal/kullanim-kosullari.html" data-href-en="https://aer0knight0.github.io/dosedial-legal/terms-of-use.html" data-i18n="terms">Kullanım koşulları</a>
+                <a href="dosedial/#sss" data-i18n="faq">SSS</a>
+                <a href="dosedial/gizlilik-politikasi.html" data-href-en="dosedial/privacy-policy.html" data-i18n="privacy">Gizlilik</a>
+                <a href="dosedial/kullanim-kosullari.html" data-href-en="dosedial/terms-of-use.html" data-i18n="terms">Kullanım koşulları</a>
               </div>
             </div>
           </div>
@@ -365,7 +373,7 @@ footer .visits svg{width:14px;height:14px}
   <div class="wrap">
     <span>© <span id="yr">2026</span> Aer0Knight</span>
     <span class="visits" id="visits" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><span id="visitsN"></span> <span data-i18n="visits">ziyaret</span></span>
-    <span data-i18n="made">Türkiye'de, sevgiyle geliştirildi.</span>
+    <span data-i18n="made">Türkiye'de bağımsız bir mühendis tarafından geliştirildi.</span>
   </div>
 </footer>
 
@@ -391,7 +399,7 @@ const T = {
     ddTag:'Never miss <span class="grad">a dose again.</span>',
     ddDesc:'A full-screen alarm rings right on time, every dose you take is logged, and the report shows what you took and what you missed. Track your parents\' medicines from the same place.',
     ddC1:'⏰ Full-screen alarm', ddC2:'📋 Dose report', ddC3:'👨‍👩‍👧 Family profiles', ddC4:'🔒 Offline, no account',
-    playSmall:'Coming soon', playSmallLive:'Get it on', privacy:'Privacy', terms:'Terms of use',
+    playSmall:'Coming soon', playSmallLive:'Get it on', privacy:'Privacy', terms:'Terms of use', faq:'FAQ', ddMore:'App page',
     secret:'Secret project',
     soon2:'I\'m working on it. Instagram sees it first.', soon3:'The idea is ready, design is on the table. Stay tuned.',
     building:'In development', designing:'In design',
@@ -401,7 +409,7 @@ const T = {
     v3t:'Readable for everyone', v3p:'Big text, clear colors, plain words. Easy enough for your grandparents too.',
     fEyebrow:'Stay tuned', fTitle:'Be the <span class="grad">first to see</span> what\'s next.',
     fLead:'I share the build process, short demos and launch dates on Instagram.', igSoon:'Instagram account coming soon',
-    made:'Built with love in Türkiye.', visits:'visits'
+    made:'Built by an independent engineer in Türkiye.', visits:'visits'
   }
 };
 const TR = {};
@@ -456,6 +464,11 @@ const play=document.getElementById('playLink');
 if(live){play.href=LINKS.dosedialPlay;play.target='_blank';play.rel='noopener';play.removeAttribute('aria-disabled');
   document.querySelector('#dosedial .status').hidden=true}
 else{play.addEventListener('click',e=>e.preventDefault())}
+/* DoseDial kartının boş bir yerine tıklayınca uygulama sayfası açılır (içteki linkler kendi işini yapar) */
+document.getElementById('dosedial').addEventListener('click',e=>{
+  if(e.target.closest('a') || getSelection().toString()) return;
+  location.href='dosedial/';
+});
 
 /* reveal on scroll */
 document.body.classList.remove('no-js');

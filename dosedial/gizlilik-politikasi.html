@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DoseDial Gizlilik Politikası</title>
+<style>:root{color-scheme:light dark}
+*{box-sizing:border-box}
+body{margin:0;background:#fbfbf9;color:#1c1c1a;
+ font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+main{max-width:44rem;margin:0 auto;padding:2.5rem 1.25rem 4rem}
+h1{font-size:1.85rem;line-height:1.25;margin:0 0 .4rem;letter-spacing:-.01em}
+h2{font-size:1.15rem;margin:2.4rem 0 .6rem;padding-top:1.2rem;border-top:1px solid #e6e4de}
+h2:first-of-type{border-top:0;padding-top:0}
+p,li{margin:.7rem 0}
+ul{padding-left:1.2rem}
+strong{font-weight:600}
+code{background:#efeee9;padding:.1em .35em;border-radius:3px;font-size:.9em}
+a{color:#1a5fb4}
+table{border-collapse:collapse;width:100%;margin:1rem 0;font-size:.95rem;display:block;overflow-x:auto}
+th,td{border:1px solid #e0ded7;padding:.5rem .7rem;text-align:left;vertical-align:top}
+th{background:#f2f1ec;font-weight:600}
+.meta{color:#6b6a64;font-size:.92rem;margin:0 0 2rem}
+.back{display:inline-block;margin-bottom:1.5rem;font-size:.92rem}
+@media (prefers-color-scheme:dark){
+ body{background:#16161a;color:#e6e5e0}
+ h2{border-top-color:#2e2e34}
+ code{background:#26262c}
+ th{background:#22222a}
+ th,td{border-color:#31313a}
+ a{color:#7fb0ee}
+ .meta{color:#9a9992}}
+</style>
+</head>
+<body>
+<main>
+<a class="back" href="./?lang=tr">&larr; DoseDial</a>
+<h1>DoseDial Gizlilik Politikası</h1>
+<p class="meta"><strong>Yürürlük tarihi:</strong> 9 Eylül 2026 <strong>Son güncelleme:</strong> 9 Eylül 2026</p>
+<h2>Özet</h2>
+<p>DoseDial verilerinizi toplamaz. Uygulama internet bağlantısı kullanmaz, hesap açmanızı istemez, reklam göstermez ve hiçbir analiz aracı içermez. Girdiğiniz her şey yalnızca kendi telefonunuzda kalır.</p>
+<p>Uygulamanın kendi kodunda hiçbir ağ isteği yoktur; sağlık verileriniz hiçbir sunucuya gönderilmez. Uygulama internet izni taşır, ancak bu izni uygulamanın kendisi değil, barkod okuma için kullanılan Google Play Hizmetleri bileşeni ekler. Ayrıntı aşağıda &quot;Kamera ve barkod tarama&quot; başlığında.</p>
+<h2>Hangi veriler işleniyor</h2>
+<p>Uygulamayı kullandığınızda şunları siz giriyorsunuz ve bunlar telefonunuzdaki veritabanında saklanıyor:</p>
+<ul><li>İlaç adları, dozları, kullanım saatleri ve talimatları</li><li>Aldığınız veya atladığınız dozların kaydı</li><li>Oluşturduğunuz profiller (kendiniz ve baktığınız kişiler için)</li><li>Stok, son kullanma tarihi ve kutu bilgileri</li><li>Uygulama ayarlarınız (dil, tema, yazı boyutu, bildirim tercihleri)</li></ul>
+<p>Bu bilgiler sağlığınıza dair kişisel verilerdir. <strong>Hiçbiri telefonunuzdan çıkmaz.</strong> Geliştirici olarak bu verilere erişimimiz yoktur; sunucumuz yoktur.</p>
+<h2>Yedekleme</h2>
+<p>Uygulama, siz istediğinizde verilerinizi bir JSON dosyası olarak telefonunuzun İndirilenler klasörüne yazar. Bu dosyanın kontrolü tamamen sizdedir.</p>
+<p>Yedek dosyası şifrelenmemiştir ve içinde ilaç bilgileriniz bulunur. Dosyayı başka birine gönderirseniz, bulut hizmetine yüklerseniz veya paylaşırsanız bu sizin kararınızdır ve sorumluluğu size aittir. Uygulama bu dosyayı kendiliğinden hiçbir yere göndermez.</p>
+<h2>Kamera ve barkod tarama</h2>
+<p>İlaç kutusundaki karekodu okutabilirsiniz. Bu işlem Google Play Hizmetleri&#x27;nin kod tarayıcısı tarafından yapılır:</p>
+<ul><li>Uygulamanın kendisinin kamera izni yoktur, kameraya doğrudan erişmez</li><li>Kamera görüntüsü telefonunuzda işlenir, uygulamaya yalnızca çözülmüş barkod metni gelir</li><li>Görüntü kaydedilmez</li><li>Tarayıcı bileşeni ilk kullanımda Google Play Hizmetleri tarafından cihazınıza indirilebilir; bu bağlantıyı uygulama değil, Google Play Hizmetleri kurar ve Google&#x27;ın kendi gizlilik politikasına tabidir</li></ul>
+<p>Bu bileşen uygulamaya <code>INTERNET</code> ve <code>ACCESS_NETWORK_STATE</code> izinlerini ekler ve Google&#x27;ın kendi veri aktarım kütüphanesini içerir; Google bu yolla kullanım ve tanılama verisi toplayabilir. Bu, Google&#x27;ın bileşenine aittir ve Google&#x27;ın gizlilik politikasına tabidir. <strong>Sizin girdiğiniz ilaç ve doz bilgileri bu yoldan da dahil olmak üzere hiçbir şekilde telefondan çıkmaz</strong> - uygulamanın kendi kodunda bu veriyi gönderen bir yol yoktur.</p>
+<p>Okunan barkod, uygulamanın içinde gömülü olarak gelen yerel bir ilaç listesiyle karşılaştırılır. <strong>Bu sorgu için internete çıkılmaz</strong> ve hiçbir kuruma bildirim yapılmaz.</p>
+<h2>Satın alma</h2>
+<p>Uygulama içinde tek seferlik bir &quot;Plus&quot; satın alması bulunur. Ödeme işlemini Google Play yürütür. Kart bilgileriniz uygulamaya hiçbir zaman ulaşmaz ve uygulama tarafından görülmez, saklanmaz. Uygulama Google Play&#x27;den yalnızca satın almanın yapılıp yapılmadığı bilgisini alır ve bunu telefonunuzda saklar.</p>
+<h2>İzinler ve ne için kullanıldıkları</h2>
+<table><thead><tr><th>İzin</th><th>Ne için</th></tr></thead><tbody><tr><td>Bildirim gönderme</td><td>İlaç saatinde hatırlatma göstermek</td></tr><tr><td>Tam zamanlı alarm</td><td>Hatırlatmanın doğru dakikada çalması</td></tr><tr><td>Cihaz açılışında başlatma</td><td>Telefon yeniden başlatıldığında kurulu alarmların kaybolmaması</td></tr><tr><td>Titreşim</td><td>Hatırlatmada titretmek</td></tr><tr><td>Tam ekran bildirim</td><td>Telefon kilitliyken alarm ekranını gösterebilmek</td></tr><tr><td>Ön plan hizmeti (medya)</td><td>Alarm sesinin siz kapatana kadar çalmaya devam etmesi</td></tr><tr><td>İnternet, ağ durumu</td><td>Uygulamanın kendisi kullanmaz; barkod okuma bileşeniyle birlikte gelir</td></tr></tbody></table>
+<p>Uygulamanın konum, rehber, kamera veya dosya okuma izni yoktur.</p>
+<h2>Verilerin saklanması ve silinmesi</h2>
+<p>Verileriniz siz silene kadar telefonunuzda kalır. İki şekilde silinir:</p>
+<ul><li>Uygulama içinden ilgili kaydı veya profili silerek</li><li>Uygulamayı telefondan kaldırarak - bu, uygulamanın tüm verisini siler</li></ul>
+<p>İndirilenler klasörüne yazdığınız yedek dosyaları uygulamayı kaldırsanız da kalır; onları kendiniz silmelisiniz.</p>
+<h2>Çocuklar</h2>
+<p>Uygulama çocuklara yönelik değildir ve çocuklardan bilerek veri toplamaz. Zaten hiç kimseden veri toplamamaktadır.</p>
+<h2>Değişiklikler</h2>
+<p>Bu politika değişirse yukarıdaki tarih güncellenir ve yeni sürüm aynı adreste yayımlanır. Veri toplama davranışını değiştiren bir güncelleme olursa bu uygulama içinde bildirilir.</p>
+<h2>İletişim</h2>
+<p>Sorularınız için: <a href="mailto:dosedial.destek@gmail.com">dosedial.destek@gmail.com</a></p>
+</main>
+</body>
+</html>
