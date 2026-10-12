@@ -2,7 +2,7 @@
   "name": "aer0knight-counter",
   "version": "1.0.0",
   "private": true,
-  "description": "Visitor counter for aer0knight0.github.io",
+  "description": "Visitor counter for aer0knight.com",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
