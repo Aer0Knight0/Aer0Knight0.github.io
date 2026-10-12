@@ -1,6 +1,6 @@
 # aer0knight0.github.io
 
-Aer0Knight geliştirici ana sayfası: https://aer0knight0.github.io
+Aer0Knight geliştirici ana sayfası: https://aer0knight.com
 
 Instagram bio'sundaki link buraya gelir. DoseDial ve ileride çıkacak diğer uygulamalar burada
 listelenir. Tek dosyalık statik sayfa: `index.html` ve `assets/`. Derleme adımı yok.
@@ -50,7 +50,7 @@ Baştan kurmak gerekirse:
    - **Watch Paths** (isteğe bağlı): `counter/**`. Sadece sayfa değişince sayaç boşuna yeniden deploy olmaz.
 3. Servise sağ tık → **Attach Volume**, mount path `/data`. Railway `RAILWAY_VOLUME_MOUNT_PATH`'i
    kendisi verir, kod onu kullanır. Volume yoksa her deploy'da sayı sıfırlanır.
-4. **Variables** (isteğe bağlı): `ALLOWED_ORIGINS`. Varsayılanı `https://aer0knight0.github.io`.
+4. **Variables** (isteğe bağlı): `ALLOWED_ORIGINS`. Varsayılanı `https://aer0knight.com`.
    Birden fazla adres virgülle ayrılır.
 5. Workspace **Usage → Usage Limits**: harcama sınırını $2 yap. Beklenen maliyet ayda ~$0.5–1,
    Hobby planın $5'lık kredisinin içinde kalır.
